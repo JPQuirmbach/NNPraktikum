@@ -4,21 +4,15 @@
 from data.mnist_seven import MNISTSeven
 from model.stupid_recognizer import StupidRecognizer
 from model.perceptron import Perceptron
-from model.logistic_regression import LogisticRegression
+#from model.logistic_regression import LogisticRegression
 from report.evaluator import Evaluator
 
 
 def main():
     data = MNISTSeven("../data/mnist_seven.csv", 3000, 1000, 1000)
-    myStupidClassifier = StupidRecognizer(data.trainingSet,
-                                          data.validationSet,
-                                          data.testSet)
-    # Uncomment this to make your Perceptron evaluated
-#     myPerceptronClassifier = Perceptron(data.trainingSet,
-#                                         data.validationSet,
-#                                         data.testSet,
-#                                         learningRate=0.005,
-#                                         epochs=30)
+
+    myStupidClassifier = StupidRecognizer(data.trainingSet, data.validationSet, data.testSet)
+    myPerceptronClassifier = Perceptron(data.trainingSet, data.validationSet, data.testSet, learningRate=0.005, epochs=30)
 
     # Train the classifiers
     print("=========================")
@@ -28,15 +22,15 @@ def main():
     myStupidClassifier.train()
     print("Done..")
 
-#     print("\nPerceptron has been training..")
-#     myPerceptronClassifier.train()
-#     print("Done..")
+    print("\nPerceptron has been training..")
+    myPerceptronClassifier.train()
+    print("Done..")
 
     # Do the recognizer
     # Explicitly specify the test set to be evaluated
     stupidPred = myStupidClassifier.evaluate()
     # Uncomment this to make your Perceptron evaluated
-#     perceptronPred = myPerceptronClassifier.evaluate()
+    perceptronPred = myPerceptronClassifier.evaluate()
 
     # Report the result
     print("=========================")
@@ -49,7 +43,7 @@ def main():
     print("\nResult of the Perceptron recognizer:")
     # evaluator.printComparison(data.testSet, perceptronPred)
     # Uncomment this to make your Perceptron evaluated
-#     evaluator.printAccuracy(data.testSet, perceptronPred)
+    #evaluator.printAccuracy(data.testSet, perceptronPred)
 
     # eval.printConfusionMatrix(data.testSet, pred)
     # eval.printClassificationResult(data.testSet, pred, target_names)
