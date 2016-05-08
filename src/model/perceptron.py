@@ -59,17 +59,12 @@ class Perceptron(Classifier):
         # Here you have to implement the Perceptron Learning Algorithm
         # to change the weights of the Perceptron
 
-        errors = []
         for _ in range(self.epochs):
             for label, input in zip(self.trainingSet.label, self.trainingSet.input):
                 error = int(label) - self.fire(input)
-                errors.append(error)
                 if error != 0:
                     for index, value in enumerate(input):
                         self.weight[index] += self.learningRate * error * value
-
-        print self.weight
-        print errors
 
 
     def classify(self, testInstance):
@@ -87,7 +82,7 @@ class Perceptron(Classifier):
         # Here you have to implement the classification for one instance,
         # i.e., return True if the testInstance is recognized as a 7,
         # False otherwise
-        pass
+        return self.fire(testInstance)
 
     def evaluate(self, test=None):
         """Evaluate a whole dataset.
