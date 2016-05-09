@@ -60,11 +60,14 @@ class Perceptron(Classifier):
         # to change the weights of the Perceptron
 
         for _ in range(self.epochs):
+            errors = []
             for label, input in zip(self.trainingSet.label, self.trainingSet.input):
-                error = int(label) - self.fire(input)
+                error = label - self.fire(input)
+                errors.append(error)
                 if error != 0:
                     for index, value in enumerate(input):
                         self.weight[index] += self.learningRate * error * value
+            print errors
 
 
     def classify(self, testInstance):
