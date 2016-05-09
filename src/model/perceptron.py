@@ -112,4 +112,5 @@ class Perceptron(Classifier):
     def fire(self, input):
         """Fire the output of the perceptron corresponding to the input """
         # I already implemented it for you to see how you can work with numpy
-        return Activation.sign(np.dot(np.array(input), self.weight))
+        bias = 1
+        return Activation.sign(bias + np.dot(np.array(input), self.weight))
